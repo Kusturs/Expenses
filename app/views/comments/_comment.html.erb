@@ -1,0 +1,18 @@
+<%= tag.article class: 'mb-3 card', id: dom_id(comment) do %>
+  <div class="row justify-content-center mb-2">
+    <div class="col-md-10">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <time class="text-muted"><%= comment.formatted_created_at %></time>
+            <div>
+              <%= link_to 'Edit', edit_payment_comment_path(payment, comment), class: 'btn btn-primary btn-sm' %>
+              <%= button_to 'Delete', payment_comment_path(payment, comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+            </div>
+          </div>
+          <p class="mt-2 mb-0"><%= comment.body %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

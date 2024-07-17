@@ -1,0 +1,38 @@
+<%= provide :page_title, "Details" %>
+
+<h1 class="text-center my-4">Payment Details</h1>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h3 class="card-title"><%= number_to_currency(@payment.amount) %></h3>
+          <p class="card-text"><strong>Product:</strong> <%= @payment.product %></p>
+          <p class="card-text"><strong>Description:</strong> <%= @payment.description %></p>
+          <p class="card-text text-muted"><small><%= @payment.created_at.strftime("%B %d, %Y %H:%M") %></small></p>
+          <div class="card-footer text-right">
+            <%= link_to 'Edit', edit_payment_path(@payment), class: 'btn btn-secondary btn-sm' %>
+            <%= button_to 'Delete', payment_path(@payment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1 class="my-4">Write Comment</h1>
+
+
+<%= render 'comments/form' %>
+
+<h2 class="my-4">Comments</h2>
+
+<div class="container">
+  <% @comments.each do |comment| %>
+
+  <% end %>
+  <%== pagination(@pagy) %>
+  <%= render partial: 'comments/comment', collection: @comments, as: :comment, locals: {payment: @payment} %>
+  <%== pagination(@pagy) %>
+</div>

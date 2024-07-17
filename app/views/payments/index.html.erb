@@ -1,0 +1,33 @@
+<%= provide :page_title, "Payments" %>
+<% currently_at "Payments" %>
+
+<h1 class="text-center my-4">Payments</h1>
+
+<div class="container">
+  <div class="d-flex justify-content mb-3">
+    <%= link_to 'New Payment', new_payment_path, class: 'btn btn-success' %>
+  </div>
+  <%== pagination(@pagy) %>
+
+  <div class="row">
+    <% @payments.each do |payment| %>
+      <div class="col-md-4 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title"><%= number_to_currency(payment.amount) %></h3>
+            <p class="card-text"><strong>Product:</strong> <%= truncate payment.product, length: 30 %></p>
+            <p class="card-text"><strong>Description:</strong> <%= truncate payment.description, length: 30 %></p>
+            <time class="text-muted"><%= payment.created_at.strftime("%B %d, %Y %H:%M") %></time>
+          </div>
+          <div class="card-footer text-right">
+            <%= link_to 'Show', payment_path(payment), class: 'btn btn-primary btn-sm' %>
+            <%= link_to 'Edit', edit_payment_path(payment), class: 'btn btn-secondary btn-sm' %>
+            <%= button_to 'Delete', payment_path(payment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-sm' %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <%== pagination(@pagy) %>
+</div>
